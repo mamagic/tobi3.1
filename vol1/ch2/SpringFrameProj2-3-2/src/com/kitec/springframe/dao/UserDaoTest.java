@@ -10,8 +10,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.kitec.springframe.domain.User;
 
-//@ExtendWith(SpringExtension.class)
-//@ContextConfiguration(classes = {DaoFactory.class})
 public class UserDaoTest {	
 	
 	@Test
@@ -24,7 +22,7 @@ public class UserDaoTest {
 		
 		User user = new User();
 		user.setId("gyumee");
-		user.setName("�ڼ�ö");
+		user.setName("¹Ú¼ºÃ¶");
 		user.setPassword("springno1");
 
 		dao.add(user);

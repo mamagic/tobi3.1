@@ -88,5 +88,21 @@ public class UserDao {
 	
 		return count;
 	}
+	
+	public void update(User user) throws SQLException, ClassNotFoundException{
+		Connection c = this.dataSource.getConnection();
+		
+		PreparedStatement ps = c.prepareStatement(
+			"update users set name = ?, password= ? where id = ?");
+		
+		ps.setString(1, user.getId());
+		ps.setString(2, user.getName());
+		ps.setString(3, user.getPassword());
+
+		ps.executeUpdate();
+
+		ps.close();
+		c.close();
+	}
 
 }

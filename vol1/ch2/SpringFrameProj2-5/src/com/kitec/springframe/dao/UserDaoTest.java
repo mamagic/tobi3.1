@@ -12,29 +12,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.kitec.springframe.domain.User;
 
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {TestDaoFactory.class})
+//@ExtendWith(SpringExtension.class)
+//@ContextConfiguration(classes = {TestDaoFactory.class})
 public class UserDaoTest { 
 	
-	@Autowired
-	ApplicationContext context;
-	
-	private UserDao dao;
-	
+//	@Autowired
+//	ApplicationContext context;
+//	
+//	@Autowired
+	UserDao dao;
 	private User user1;
 	private User user2;
 	private User user3;	
 		
 	@BeforeEach
 	public void setUp() {	
-		
-		this.dao = this.context.getBean("userDao", UserDao.class);
+		UserDao dao = new UserDao();
+		dao.setDataSource(setDataSource());
+		//this.dao = this.context.getBean("userDao", UserDao.class);
 		user1 = new User("user1", "sungkim", "5678");
 		user2 = new User("user2", "brucelee", "9012");
 		user3 = new User("user3", "haechoi", "1234");
@@ -42,6 +44,10 @@ public class UserDaoTest {
 	
 	@Test
 	public void addAndGet() throws SQLException, ClassNotFoundException {				
+
+		UserDao dao = new UserDao();
+		dao.setDataSource(setDataSource());
+		
 		dao.deleteAll();
 		assertEquals(dao.getCount(), 0);
 		
@@ -60,6 +66,9 @@ public class UserDaoTest {
 	
 	@Test
 	public void count() throws SQLException, ClassNotFoundException {		
+		UserDao dao = new UserDao();
+		dao.setDataSource(setDataSource());
+
 		dao.deleteAll();
 		assertEquals(dao.getCount(), 0);
 
@@ -75,11 +84,39 @@ public class UserDaoTest {
 	
 	@Test
 	public void getUserFailure() throws SQLException, ClassNotFoundException {		
+
+		UserDao dao = new UserDao();
+		dao.setDataSource(setDataSource());
 		dao.deleteAll();
 		assertEquals(dao.getCount(), 0);		
 		
 		Assertions.assertThrows(EmptyResultDataAccessException.class, 
 				() -> {dao.get("unknown_id");});	
 	}	
+	
+	@Test
+	public void update() throws SQLException, ClassNotFoundException {
+		UserDao dao = new UserDao();
+		dao.setDataSource(setDataSource());
+
+		dao.deleteAll();
+		User user = new User("user1", "ryuhyunwoo", "1234");
+		
+		dao.add(user);
+		dao.update(user);
+		
+		User user1 = dao.get("user1");
+		System.out.println(user1.getName());
+		assertEquals(user.getName(), user1.getName());		
+	}
+	
+	public SimpleDriverDataSource setDataSource() {
+		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+		dataSource.setDriverClass(com.mysql.cj.jdbc.Driver.class);
+		dataSource.setUrl("jdbc:mysql://localhost:3306/sbdt_db1?characterEncoding=UTF-8");
+		dataSource.setUsername("root");
+		dataSource.setPassword("QWERzxc!@#1234");
+		return dataSource;
+	}
 
 }

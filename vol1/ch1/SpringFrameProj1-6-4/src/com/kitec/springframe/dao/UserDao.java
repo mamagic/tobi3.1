@@ -11,7 +11,14 @@ public class UserDao {
 	
 	private ConnectionMaker connectionMaker;
 	
-	public UserDao(ConnectionMaker simpleConnectionMaker) {
+	public UserDao() {
+		
+	}
+	public UserDao(ConnectionMaker connectionMaker2) {
+		this.connectionMaker = connectionMaker2;
+	}
+	
+	public void setUserDao(ConnectionMaker simpleConnectionMaker) {
 		this.connectionMaker = simpleConnectionMaker;
 	}
 	
@@ -49,6 +56,10 @@ public class UserDao {
 		c.close();
 
 		return user;
+	}
+
+	public void setConnectionMaker(ConnectionMaker connectionMaker2) {
+		this.connectionMaker = connectionMaker2;
 	}	
 
 }

@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+//import org.springframework.test.context.ContextConfiguration;
+//import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.kitec.springframe.domain.User;
 
@@ -24,10 +24,15 @@ public class UserDaoTest {
 	private User user1;
 	private User user2;
 	private User user3;	
+	
+	public UserDaoTest() {
+		
+	}
 		
 	@BeforeEach
 	public void setUp() {	
 		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+		
 		this.dao = context.getBean("userDao", UserDao.class);
 		user1 = new User("user1", "sungkim", "5678");
 		user2 = new User("user2", "brucelee", "9012");
@@ -70,7 +75,13 @@ public class UserDaoTest {
 	@Test
 	public void getUserFailure() throws SQLException, ClassNotFoundException {		
 		dao.deleteAll();
-		assertEquals(dao.getCount(), 0);		
+		assertEquals(dao.getCount(), 0);	
+		
+//		public interface Executable {
+//
+//			void execute() throws Throwable;
+//
+//		}
 		
 		Assertions.assertThrows(EmptyResultDataAccessException.class, 
 				() -> {dao.get("unknown_id");});	

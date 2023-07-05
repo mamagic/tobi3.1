@@ -17,8 +17,8 @@ public class UserDaoTest {
 		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
 		UserDao dao = context.getBean("userDao", UserDao.class);
 		
-		User user1 = new User("gyumee", "¹Ú¼ºÃ¶", "springno1");
-		User user2 = new User("leegw700", "ÀÌ±æ¿ø", "springno2");
+		User user1 = new User("gyumee", "ë°•ì„±ì² ", "springno1");
+		User user2 = new User("leegw700", "ì´ê¸¸ì›", "springno2");
 		
 		dao.deleteAll();		
 		assertEquals(dao.getCount(), 0);
@@ -40,9 +40,9 @@ public class UserDaoTest {
 	public void count() throws SQLException, ClassNotFoundException {
 		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
 		UserDao dao = context.getBean("userDao", UserDao.class);
-		User user1 = new User("gyumee", "¹Ú¼ºÃ¶", "springno1");
-		User user2 = new User("leegw700", "ÀÌ±æ¿ø", "springno2");
-		User user3 = new User("bumjin", "¹Ú¹üÁø", "springno3");
+		User user1 = new User("gyumee", "ë°•ì„±ì² ", "springno1");
+		User user2 = new User("leegw700", "ì´ê¸¸ì›", "springno2");
+		User user3 = new User("bumjin", "ë°•ë²”ì§„", "springno3");
 		
 		dao.deleteAll();
 		assertEquals(dao.getCount(), 0);

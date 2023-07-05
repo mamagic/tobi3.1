@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,19 +14,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.kitec.springframe.domain.User;
 
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {TestDaoFactory.class})
+//@ExtendWith(SpringExtension.class)
+//@ContextConfiguration(classes = {TestDaoFactory.class})
+//@DirtiesContext
 public class UserDaoTest { 
 	
-	@Autowired
-	ApplicationContext context;
-	
+//	@Autowired
+//	ApplicationContext context;
+//	
+//	@Autowired
 	private UserDao dao;
 	
 	private User user1;
@@ -34,7 +40,14 @@ public class UserDaoTest {
 	@BeforeEach
 	public void setUp() {	
 		
-		this.dao = this.context.getBean("userDao", UserDao.class);
+		//this.dao = this.context.getBean("userDao", UserDao.class);
+		dao = new UserDao();
+		DataSource dataSource = new SingleConnectionDataSource("jdbc:mysql://localhost:3306/sbdt_db1?characterEncoding=UTF-8", 
+				"root", 
+				"1234", 
+				true);
+		dao.setDataSource(dataSource);
+		
 		user1 = new User("user1", "sungkim", "5678");
 		user2 = new User("user2", "brucelee", "9012");
 		user3 = new User("user3", "haechoi", "1234");

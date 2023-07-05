@@ -1,4 +1,4 @@
-package com.kitec.springframe.dao;
+package com.intheeast.springframe.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,10 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.kitec.springframe.domain.User;
+import com.intheeast.springframe.domain.User;
 
 
-public class UserDao {
+public abstract class UserDao {	
+	
 	public void add(User user) throws ClassNotFoundException, SQLException {
 		Connection c = getConnection();
 
@@ -46,31 +47,32 @@ public class UserDao {
 		return user;
 	}
 	
-	private Connection getConnection() throws ClassNotFoundException, SQLException {
+	abstract protected Connection getConnection() throws ClassNotFoundException, SQLException ;
+	/*private Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/sbdt_db?characterEncoding=UTF-8", 
 				"root",
 				"1234");
 		return c;
-	}
+	}*/
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		UserDao dao = new UserDao();
+		UserDao dao = new NUserDao();
 
 		User user = new User();
 		user.setId("whiteship");
-		user.setName("πÈ±‚º±");
+		user.setName("Î∞±Í∏∞ÏÑ†");
 		user.setPassword("married");
 
 		dao.add(user);
 			
-		System.out.println(user.getId() + " µÓ∑œ º∫∞¯");
+		System.out.println(user.getId() + "\n Îì±Î°ù ÏÑ±Í≥µ");
 		
 		User user2 = dao.get(user.getId());
 		System.out.println(user2.getName());
 		System.out.println(user2.getPassword());
 			
-		System.out.println(user2.getId() + " ¡∂»∏ º∫∞¯");
+		System.out.println(user2.getId() + "\n Ï°∞Ìöå ÏÑ±Í≥µ");
 	}
 
 }

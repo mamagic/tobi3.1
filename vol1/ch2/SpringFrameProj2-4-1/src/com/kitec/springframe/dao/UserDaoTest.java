@@ -32,7 +32,7 @@ public class UserDaoTest {
 	private User user3;	
 		
 	@BeforeEach
-	public void setUp() {	
+	public void setUp() {
 		
 		this.dao = this.context.getBean("userDao", UserDao.class);
 		user1 = new User("user1", "sungkim", "5678");

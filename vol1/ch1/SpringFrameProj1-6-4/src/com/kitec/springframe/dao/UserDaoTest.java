@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import com.kitec.springframe.domain.User;
 
@@ -12,23 +13,24 @@ public class UserDaoTest {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		ApplicationContext context = 
 				new AnnotationConfigApplicationContext(DaoFactory.class);
-		
+				//new GenericXmlApplicationContext("com/kitec/springframe/applicationContext.xml");
+				
 		UserDao dao = context.getBean("userDao", UserDao.class);
 
 		User user = new User();
 		user.setId("whiteship");
-		user.setName("πÈ±‚º±");
+		user.setName("Î∞±Í∏∞ÏÑ†");
 		user.setPassword("married");
 
 		dao.add(user);
 			
-		System.out.println(user.getId() + " µÓ∑œ º∫∞¯");
+		System.out.println(user.getId() + "\nÎì±Î°ù ÏÑ±Í≥µ");
 		
 		User user2 = dao.get(user.getId());
 		System.out.println(user2.getName());
 		System.out.println(user2.getPassword());
 			
-		System.out.println(user2.getId() + " ¡∂»∏ º∫∞¯");
+		System.out.println(user2.getId() + "\nÏ°∞Ìöå ÏÑ±Í≥µ");
 	}
 
 }

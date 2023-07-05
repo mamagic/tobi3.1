@@ -1,4 +1,4 @@
-package com.kitec.springframe.dao;
+package com.intheeast.springframe.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.kitec.springframe.domain.User;
+import com.intheeast.springframe.domain.User;
 
 
 

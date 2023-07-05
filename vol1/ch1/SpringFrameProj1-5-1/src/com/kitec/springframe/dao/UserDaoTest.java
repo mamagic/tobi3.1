@@ -13,22 +13,24 @@ public class UserDaoTest {
 		ApplicationContext context = 
 				new AnnotationConfigApplicationContext(DaoFactory.class);
 		
+		System.out.println("hello world");
+		
 		UserDao dao = context.getBean("userDao", UserDao.class);
 
 		User user = new User();
 		user.setId("whiteship");
-		user.setName("¹é±â¼±");
+		user.setName("ë°±ê¸°ì„ ");
 		user.setPassword("married");
 
 		dao.add(user);
 			
-		System.out.println(user.getId() + " µî·Ï ¼º°ø");
+		System.out.println(user.getId() + "\në“±ë¡ ì„±ê³µ");
 		
 		User user2 = dao.get(user.getId());
 		System.out.println(user2.getName());
 		System.out.println(user2.getPassword());
 			
-		System.out.println(user2.getId() + " Á¶È¸ ¼º°ø");
+		System.out.println(user2.getId() + "\nì¡°íšŒ ì„±ê³µ");
 	}
 
 }

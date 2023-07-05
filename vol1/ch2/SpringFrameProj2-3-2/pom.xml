@@ -20,12 +20,14 @@
         <artifactId>spring-context</artifactId>
         <version>5.3.20</version>
     </dependency>
+    <!-- 
     <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-test</artifactId>
         <version>5.3.20</version>        
-        <!-- <scope>test</scope>  -->
+        <scope>test</scope>
     </dependency>
+    -->
 	
 	<dependency>
         <groupId>org.springframework</groupId>
@@ -45,9 +47,8 @@
 	    <artifactId>junit-jupiter</artifactId>
 	    <version>5.5.0</version>
 	    <!-- <scope>test</scope> -->
-	</dependency>	
-	
-	
+	</dependency>
+		
 	
     
   </dependencies>
